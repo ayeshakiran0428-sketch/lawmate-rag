@@ -1,0 +1,4 @@
+rag_env/scripts/activate
+uvicorn api:app --reload
+http://127.0.0.1:8000/docs
+http://127.0.0.1:8000/docs/api/chat #api end point url 
