@@ -1,7 +1,7 @@
 import os
 from groq import Groq
 from dotenv import load_dotenv
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
 from langchain_pinecone import PineconeVectorStore
 from utils import clean_query, translate_to_english
 
@@ -21,7 +21,7 @@ groq_client = Groq(api_key=GROQ_API_KEY)
 
 # Initialize Pinecone and Embeddings
 print("Connecting to Pinecone index in rag_core...")
-embeddings = HuggingFaceEmbeddings(model_name='all-MiniLM-L6-v2')
+embeddings = FastEmbedEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
 try:
     vectorstore = PineconeVectorStore.from_existing_index(
         index_name=PINECONE_INDEX_NAME, 
