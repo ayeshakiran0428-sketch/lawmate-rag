@@ -50,12 +50,9 @@ st.markdown(f"""
 
     .lm-hero {{
         background: linear-gradient(180deg, {DARK_GREEN} 0%, {GREEN} 100%);
-        border-radius: 18px;
-        padding: 28px 24px 24px 24px;
+        border-radius: 18px 18px 0 0;
+        padding: 28px 24px 20px 24px;
         color: {WHITE};
-        margin-bottom: -40px;
-        position: relative;
-        z-index: 1;
     }}
     .lm-hero-top {{
         display: flex;
@@ -86,11 +83,11 @@ st.markdown(f"""
 
     .lm-card {{
         background: {WHITE};
-        border-radius: 16px;
-        padding: 18px 18px 8px 18px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-        position: relative;
-        z-index: 2;
+        border: 1px solid #eee;
+        border-top: none;
+        border-radius: 0 0 16px 16px;
+        padding: 20px 20px 10px 20px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
         margin-bottom: 18px;
     }}
     .lm-note {{
@@ -223,7 +220,7 @@ Answer:
 """
     try:
         response = groq_client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model="openai/gpt-oss-120b",
             messages=[{"role": "user", "content": prompt}]
         )
         return response.choices[0].message.content
@@ -251,9 +248,8 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ---------- FLOATING CARD: INPUT ----------
+# ---------- CARD: INPUT (attached directly under hero) ----------
 st.markdown('<div class="lm-card">', unsafe_allow_html=True)
-st.markdown("<div style='height:36px'></div>", unsafe_allow_html=True)
 
 query = st.text_area(
     label="Case description",
