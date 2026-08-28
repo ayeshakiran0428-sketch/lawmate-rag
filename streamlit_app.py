@@ -14,155 +14,97 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# ---------- THEME (Pakistan flag: deep green + white) ----------
-DARK_GREEN = "#01411C"
-GREEN = "#046A38"
-LIGHT_GREEN = "#B7D9C4"
-WHITE = "#FFFFFF"
-
-st.markdown(f"""
+# ---------- FONTS + THEME CSS (matches lawmate_redesign.html) ----------
+st.markdown("""
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-    #MainMenu, footer, header {{visibility: hidden;}}
-    .stApp {{
-        background-color: {WHITE};
-    }}
-    .block-container {{
-        padding-top: 1.5rem;
-        max-width: 640px;
-    }}
+:root{
+  --ink:#14231c;
+  --forest:#0e3b2c;
+  --forest-deep:#0a2b20;
+  --forest-light:#1e5c45;
+  --parchment:#faf8f3;
+  --sage:#eef2ec;
+  --gold:#b8863a;
+  --gold-light:#f4e9d6;
+  --line:#e4e0d5;
+  --text-muted:#6b7568;
+  --white:#ffffff;
+}
+#MainMenu, footer, header {visibility: hidden;}
+.stApp { background: var(--parchment); font-family: 'Inter', sans-serif; }
+.block-container { max-width: 560px; padding-top: 20px; padding-bottom: 40px; }
 
-    .lm-navbar {{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 4px 2px 18px 2px;
-        border-bottom: 1px solid #eee;
-        margin-bottom: 20px;
-    }}
-    .lm-logo {{
-        font-size: 1.3rem;
-        font-weight: 800;
-        color: #1a1a1a;
-    }}
-    .lm-logo span {{
-        color: {GREEN};
-    }}
+.lm-header{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 20px; border-bottom:1px solid var(--line);
+  background:var(--white); border-radius:14px; margin-bottom:20px;
+}
+.lm-logo{ font-family:'Fraunces',serif; font-size:21px; font-weight:600; display:flex; align-items:center; gap:8px; }
+.lm-logo .mark{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:28px; height:28px; border-radius:7px; background:var(--forest); color:white; font-size:14px;
+}
+.lm-logo .law{ color:var(--ink); }
+.lm-logo .mate{ color:var(--forest); }
+.lm-bell{
+  width:38px; height:38px; border-radius:10px; background:var(--sage);
+  display:flex; align-items:center; justify-content:center; color:var(--forest); font-size:16px; position:relative;
+}
 
-    .lm-hero {{
-        background: linear-gradient(180deg, {DARK_GREEN} 0%, {GREEN} 100%);
-        border-radius: 18px 18px 0 0;
-        padding: 28px 24px 20px 24px;
-        color: {WHITE};
-    }}
-    .lm-hero-top {{
-        display: flex;
-        align-items: center;
-        gap: 14px;
-    }}
-    .lm-hero-icon {{
-        width: 46px;
-        height: 46px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.15);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.4rem;
-        flex-shrink: 0;
-    }}
-    .lm-hero-title {{
-        font-size: 1.35rem;
-        font-weight: 700;
-        margin: 0;
-    }}
-    .lm-hero-sub {{
-        font-size: 0.85rem;
-        color: {LIGHT_GREEN};
-        margin: 2px 0 0 0;
-    }}
+.lm-hero{
+  position:relative; background:linear-gradient(155deg, var(--forest) 0%, var(--forest-deep) 100%);
+  border-radius:20px; padding:28px 24px 26px; color:var(--white); margin-bottom:20px; overflow:hidden;
+}
+.lm-hero-badge{
+  width:44px; height:44px; border-radius:12px; background:rgba(255,255,255,0.12);
+  display:flex; align-items:center; justify-content:center; margin-bottom:14px; font-size:20px;
+}
+.lm-hero h1{ font-family:'Fraunces',serif; font-size:24px; font-weight:600; margin:0 0 6px; }
+.lm-hero p{ margin:0; font-size:14px; line-height:1.5; color:rgba(255,255,255,0.72); max-width:320px; }
+.lm-hero-stat{ margin-top:18px; display:flex; gap:22px; }
+.lm-hero-stat div{ font-size:11px; color:rgba(255,255,255,0.55); text-transform:uppercase; letter-spacing:0.04em; }
+.lm-hero-stat strong{ display:block; font-family:'Fraunces',serif; font-size:17px; font-weight:600; color:var(--white); margin-bottom:2px; }
 
-    .lm-card {{
-        background: {WHITE};
-        border: 1px solid #eee;
-        border-top: none;
-        border-radius: 0 0 16px 16px;
-        padding: 20px 20px 10px 20px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-        margin-bottom: 18px;
-    }}
-    .lm-note {{
-        font-size: 0.78rem;
-        color: #888;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        margin-top: 6px;
-    }}
+.lm-card{ background:var(--white); border:1px solid var(--line); border-radius:18px; padding:20px 20px 6px 20px; margin-bottom:20px; }
+.lm-card-label{ font-size:13px; font-weight:600; color:var(--ink); margin-bottom:10px; }
+.lm-confidential{ display:flex; align-items:center; gap:6px; margin:10px 0 6px 0; font-size:12px; color:var(--text-muted); }
 
-    .lm-tips {{
-        background: {DARK_GREEN};
-        color: {WHITE};
-        border-radius: 14px;
-        padding: 18px 20px;
-        margin-bottom: 18px;
-    }}
-    .lm-tips h4 {{
-        margin: 0 0 10px 0;
-        font-size: 0.95rem;
-    }}
-    .lm-tips ul {{
-        margin: 0;
-        padding-left: 18px;
-        font-size: 0.85rem;
-        line-height: 1.7;
-        color: {LIGHT_GREEN};
-    }}
+.stTextArea textarea{
+  border:1.5px solid var(--line) !important; border-radius:12px !important;
+  padding:14px !important; font-family:'Inter',sans-serif !important; font-size:14.5px !important;
+  line-height:1.55 !important; color:var(--ink) !important; background:var(--parchment) !important;
+}
+.stTextArea textarea:focus{
+  border-color:var(--forest) !important; box-shadow:0 0 0 3px rgba(14,59,44,0.10) !important; background:var(--white) !important;
+}
 
-    .lm-results-header {{
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-weight: 700;
-        color: {DARK_GREEN};
-        margin: 4px 0 10px 0;
-        font-size: 1rem;
-    }}
-    .lm-results-box {{
-        background: #F5FAF7;
-        border: 1px solid {LIGHT_GREEN};
-        border-radius: 14px;
-        padding: 18px 20px;
-        font-size: 0.92rem;
-        color: #222;
-        white-space: pre-wrap;
-        line-height: 1.6;
-    }}
-    .lm-placeholder {{
-        color: #999;
-        font-style: italic;
-    }}
+.lm-tips{ background:var(--sage); border-radius:18px; padding:20px; margin-bottom:20px; }
+.lm-tips-head{ display:flex; align-items:center; gap:8px; margin-bottom:14px; }
+.lm-tips-head .icon{
+  width:26px; height:26px; border-radius:8px; background:var(--gold-light);
+  display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:13px;
+}
+.lm-tips-head h2{ font-family:'Fraunces',serif; font-size:15px; font-weight:600; margin:0; color:var(--ink); }
+.lm-tips-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.lm-tip-item{ background:var(--white); border-radius:12px; padding:12px 12px 13px; border:1px solid var(--line); }
+.lm-tip-item .n{ font-family:'Fraunces',serif; font-size:11px; color:var(--gold); font-weight:600; letter-spacing:0.03em; margin-bottom:5px; display:block; }
+.lm-tip-item p{ margin:0; font-size:12.5px; line-height:1.45; color:var(--ink); }
 
-    .stTextArea textarea {{
-        border-radius: 10px !important;
-        border: 1px solid #ddd !important;
-        font-size: 0.92rem !important;
-    }}
+div.stButton > button{
+  width:100%; border:none; background:var(--forest); color:var(--white) !important;
+  font-family:'Inter',sans-serif; font-weight:600; font-size:15px; padding:16px; border-radius:14px;
+  box-shadow:0 10px 24px -8px rgba(14,59,44,0.45); transition:0.15s ease;
+}
+div.stButton > button:hover{ background:var(--forest-light); transform:translateY(-1px); box-shadow:0 14px 28px -8px rgba(14,59,44,0.5); }
 
-    div.stButton > button {{
-        background-color: {WHITE};
-        color: {DARK_GREEN};
-        border: 2px solid {DARK_GREEN};
-        border-radius: 12px;
-        padding: 10px 0;
-        font-weight: 700;
-        width: 100%;
-        transition: 0.2s;
-    }}
-    div.stButton > button:hover {{
-        background-color: {DARK_GREEN};
-        color: {WHITE};
-        border-color: {DARK_GREEN};
-    }}
+.lm-results-head{ font-family:'Fraunces',serif; font-size:16px; font-weight:600; color:var(--ink); margin:24px 0 10px 0; display:flex; align-items:center; gap:8px; }
+.lm-results-box{
+  background:var(--white); border:1px solid var(--line); border-radius:16px; padding:20px;
+  font-size:14px; color:var(--ink); white-space:pre-wrap; line-height:1.65;
+}
+.lm-placeholder{ color:var(--text-muted); font-style:italic; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -227,65 +169,63 @@ Answer:
     except Exception as e:
         return f"⚠️ Error connecting to Groq API: {e}"
 
-# ---------- NAVBAR ----------
+# ---------- HEADER ----------
 st.markdown("""
-<div class="lm-navbar">
-    <div class="lm-logo">LAW<span>MATE</span></div>
-    <div style="font-size:1.2rem;">🔔</div>
+<div class="lm-header">
+    <div class="lm-logo"><span class="mark">⚖️</span><span class="law">Law</span><span class="mate">Mate</span></div>
+    <div class="lm-bell">🔔</div>
 </div>
 """, unsafe_allow_html=True)
 
 # ---------- HERO ----------
 st.markdown("""
 <div class="lm-hero">
-    <div class="lm-hero-top">
-        <div class="lm-hero-icon">🧠</div>
-        <div>
-            <p class="lm-hero-title">AI Legal Analyzer</p>
-            <p class="lm-hero-sub">Powered by Pakistani Law</p>
-        </div>
+    <div class="lm-hero-badge">🧠</div>
+    <h1>AI Legal Analyzer</h1>
+    <p>Describe what happened in plain language. We'll identify the legal issues and outline your options.</p>
+    <div class="lm-hero-stat">
+        <div><strong>2 min</strong>Avg. analysis</div>
+        <div><strong>50+</strong>Case types</div>
+        <div><strong>256-bit</strong>Encryption</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
 
-# ---------- CARD: INPUT (attached directly under hero) ----------
+# ---------- INPUT CARD ----------
 st.markdown('<div class="lm-card">', unsafe_allow_html=True)
+st.markdown('<div class="lm-card-label">Describe your situation</div>', unsafe_allow_html=True)
 
 query = st.text_area(
     label="Case description",
     label_visibility="collapsed",
-    placeholder="Describe your legal situation — what happened, who was involved, and any documents you have. The more detail you provide, the more accurate the analysis will be...",
-    height=140
+    placeholder="e.g. On August 12th, another driver rear-ended my car at a red light on Main Street. There was visible damage to my bumper and the other driver admitted fault at the scene...",
+    height=130
 )
 
 st.markdown(
-    '<div class="lm-note">🔒 Your information is kept confidential and secure.</div>',
+    '<div class="lm-confidential">🔒 Your information is kept confidential and secure.</div>',
     unsafe_allow_html=True
 )
-st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
 # ---------- TIPS ----------
 st.markdown("""
 <div class="lm-tips">
-    <h4>💡 Tips for Better Analysis</h4>
-    <ul>
-        <li>Be specific about dates, locations, and parties involved</li>
-        <li>Mention any existing contracts, agreements, or documents</li>
-        <li>Describe the outcome you're hoping to achieve</li>
-        <li>Include any previous legal actions taken</li>
-    </ul>
+    <div class="lm-tips-head"><span class="icon">💡</span><h2>Tips for a better analysis</h2></div>
+    <div class="lm-tips-grid">
+        <div class="lm-tip-item"><span class="n">01</span><p>Be specific about dates, locations, and parties involved</p></div>
+        <div class="lm-tip-item"><span class="n">02</span><p>Mention any existing contracts, agreements, or documents</p></div>
+        <div class="lm-tip-item"><span class="n">03</span><p>Describe the outcome you're hoping to achieve</p></div>
+        <div class="lm-tip-item"><span class="n">04</span><p>Include any previous legal actions taken</p></div>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
 # ---------- ANALYZE BUTTON ----------
-analyze = st.button("Analyze My Case")
+analyze = st.button("Analyze My Case →")
 
 # ---------- RESULTS ----------
-st.markdown(
-    '<div class="lm-results-header">📄 Applicable Pakistani Law Sections</div>',
-    unsafe_allow_html=True
-)
+st.markdown('<div class="lm-results-head">📄 Applicable Pakistani Law Sections</div>', unsafe_allow_html=True)
 
 if analyze and query.strip():
     with st.spinner("Searching relevant law sections..."):
